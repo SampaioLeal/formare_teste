@@ -1,6 +1,8 @@
 import { decorate, observable } from "mobx";
 import io from "socket.io-client";
 
+const URL = "http://localhost:3001"
+
 class Store {
   // observable
   user = null;
@@ -18,7 +20,7 @@ class Store {
     window.location.reload();
   }
   connect() {
-    this.socket = io("http://localhost:3001");
+    this.socket = io(URL);
     this.socket.emit("login", this.user);
     this.socket.on("messages", (messages) => (this.messages = messages));
     this.socket.on("newUser", (users) => (this.users = users));
